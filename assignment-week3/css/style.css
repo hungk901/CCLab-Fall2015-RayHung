@@ -1,0 +1,82 @@
+body{
+   background-color: rgba(20, 20, 20, 0.95);
+}
+
+.triangle{
+   position: absolute;
+   width: 0px;
+   height: 0px;
+   margin: 20px;
+   top: 30vh;
+   opacity: 0.8;
+}
+#up{
+   position: absolute;
+   left: 10vw;
+
+   border-left: 75px solid transparent;
+   border-right: 75px solid transparent;
+   border-bottom: 150px solid;
+   border-bottom-color: #FF960D;
+}
+#down{
+   position: absolute;
+   left: 32vw;
+
+   border-left: 75px solid transparent;
+   border-right: 75px solid transparent;
+   border-top: 150px solid;
+   border-top-color: #00FF3F;
+}
+#left{
+   position: absolute;
+   left: 54vw;
+
+   border-top: 75px solid transparent;
+   border-right: 150px solid;
+   border-bottom: 75px solid transparent;
+   border-right-color: #2DB4FF;
+}
+#right{
+   position: absolute;
+   left: 76vw;
+
+   border-top: 75px solid transparent;
+   border-left: 150px solid;
+   border-bottom: 75px solid transparent;
+   border-left-color: #FFD600;
+}
+
+.selection{
+   position: absolute;
+   text-align: center;
+   background-color: rgba(125, 125, 125, 0.6);
+   color: rgba(10, 10, 10, 1);
+   margin: 0px 50px 0px 50px;
+   padding: 2.5px 30px 2.5px 30px;
+   font-family: 'Raleway', sans-serif;
+   font-size: 16px;
+   top: 75vh;
+   left: 17.5vw;
+}
+#bounce{
+   position: relative;
+   float: left;
+}
+#fade{
+   position: relative;
+   float: left;
+}
+#slide{
+   position: relative;
+   float: left;
+}
+#zoom{
+   position: relative;
+   float: left;
+}
+#bounce:hover, #fade:hover, #slide:hover, #zoom:hover{
+   background-color: rgba(225, 225, 225, 0.6);
+   color: rgba(0, 0, 0, 1);
+}
+
