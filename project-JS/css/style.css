@@ -19,17 +19,18 @@ body{
    z-index: 1;
    margin:0 auto;
    text-align: center;
-   letter-spacing: 5px;
    text-shadow: 1.5px 1.5px 5px rgba(0, 0, 0, 0.5);
    color: white;
 }
 .time{
    position: relative;
+   letter-spacing: 15px;
    top: 25vh;
    font-size: 120px;
 }
 .date{
    position: relative;
+   letter-spacing: 5px;
    top: 25vh;
    font-size: 48px;
 }

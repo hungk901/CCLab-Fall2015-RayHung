@@ -3,35 +3,26 @@ var city = '';
 var state = '';
 var country = '';
 var APIKey = '6f206707a93aceba';
+var UTC;
+var globalTimeUTC = [moment().format('ZZ')];
 
 var updateTime = function(globalTimeUTC){
-    // Get Local UTC.
-    var thisUTC = new Date();
-    thisUTC = (thisUTC.getTimezoneOffset())/60;
 
-    var globalTimeUTC = Number(globalTimeUTC);
-    console.log(globalTimeUTC);
+    UTC = globalTimeUTC[0];
+    // UTC = 9;
 
-    var thisDate = moment().utcOffset(globalTimeUTC).format('ddd, MMM DD, YYYY')
+    // console.log(globalTimeUTC);
 
-    var thisTime = moment().utcOffset(globalTimeUTC).format('HH:mm:ss');
+    var thisTime = moment().utcOffset(UTC).format('HH:mm:ss');
+    var thisDate = moment().utcOffset(UTC).format('ddd, MMM DD, YYYY')
 
-    // Get Local UTC.
-    // var thisUTC = new Date();
-    // thisUTC = (thisUTC.getTimezoneOffset())/60;
-
-    // var showTime = UTC_0 + ':' + thisMinute + ':' + thisSecond;
-
-    console.log(thisDate);
-    console.log(thisTime);
-
-    // setTimeout(updateTime, 1000);
-
-    // console.log(UTC_0);
-    // console.log(showTime);
+    // console.log(thisDate);
+    // console.log(thisTime);
 
     $('.time').text(thisTime);
     $('.date').text(thisDate);
+
+    // setTimeout(updateTime, 1000);
 }
 
 var loadTime = function(response){
@@ -42,11 +33,13 @@ var loadTime = function(response){
     };
 
     // Transfer the "Hour String" into "Number".
-    var globalTimeUTC = Number((response.current_observation.local_tz_offset).slice(0, 3).replace(/0/g, ''));
+    // var globalTimeUTC = Number(moment().format('ZZ'));
+    // globalTimeUTC = Number((response.current_observation.local_tz_offset).slice(0, 3).replace(/0/g, ''));
+
+    globalTimeUTC.unshift(response.current_observation.local_tz_offset);
+    updateTime(globalTimeUTC);
 
     // console.log(globalTimeUTC);
-
-    updateTime(globalTimeUTC);
 }
 
 var loadWeather = function(response){
@@ -90,7 +83,7 @@ var getPhoto = function(){
     var flickrAPI = "http://api.flickr.com/services/feeds/photos_public.gne?jsoncallback=?";
 
     $.getJSON(flickrAPI, {
-        tags: city + ', ' + country + ', skyline',
+        tags: city + ', ' + country + ', sky',
         tagmode: "all",
         format: "json"
     },
@@ -138,5 +131,5 @@ var init = function(){
 
 $(document).ready(function(){
     init();
-    setTimeout(updateTime, 1000);
+    setTimeout(updateTime(globalTimeUTC), 1000);
 });
