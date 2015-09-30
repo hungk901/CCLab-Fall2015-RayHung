@@ -5,17 +5,26 @@ var country = '';
 var APIKey = '6f206707a93aceba';
 var UTC;
 var globalTimeUTC = [moment().format('ZZ')];
+var x = 0;
+
+var plus = function(x){
+    x = x + 1;
+    //setTimeout(plus, 1000);
+    console.log(x);
+    return x;
+}
 
 var updateTime = function(globalTimeUTC){
 
     UTC = globalTimeUTC[0];
-    // UTC = 9;
+    // UTC = -4;
 
     // console.log(globalTimeUTC);
 
     var thisTime = moment().utcOffset(UTC).format('HH:mm:ss');
     var thisDate = moment().utcOffset(UTC).format('ddd, MMM DD, YYYY')
 
+    plus(x);
     // console.log(thisDate);
     // console.log(thisTime);
 
@@ -23,6 +32,7 @@ var updateTime = function(globalTimeUTC){
     $('.date').text(thisDate);
 
     // setTimeout(updateTime, 1000);
+    // setTimeout(plus, 1000);
 }
 
 var loadTime = function(response){
@@ -39,11 +49,14 @@ var loadTime = function(response){
     globalTimeUTC.unshift(response.current_observation.local_tz_offset);
     updateTime(globalTimeUTC);
 
+
     // console.log(globalTimeUTC);
 }
 
 var loadWeather = function(response){
     if (response.response.error) {
+
+
         // alert(response.response.error);
         alert('Please check your input!');
         return;
@@ -89,6 +102,8 @@ var getPhoto = function(){
     },
 
     function(data) {
+        // alert("data = " + JSON.stringify(data)); // Get data from JSON.
+
         $.each(data.items, function(i, item) {
             var flickrPhoto = item.media.m;
             flickrPhoto = flickrPhoto.split("_m.jpg", 1) + "_b.jpg";    // Restructuring the URL to get HQ photo.
@@ -129,7 +144,18 @@ var init = function(){
     });
 };
 
+var autoFillTags = function(){
+    var availableTags = [
+        "Toyko, JP"
+    ];
+    $( ".currentCity" ).autocomplete({
+      source: availableTags
+    });
+};
+
 $(document).ready(function(){
     init();
+    autoFillTags();
     setTimeout(updateTime(globalTimeUTC), 1000);
+    setTimeout(plus, 1000);
 });
