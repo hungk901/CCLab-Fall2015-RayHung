@@ -5,17 +5,8 @@ var country = '';
 var APIKey = '6f206707a93aceba';
 var UTC;
 var globalTimeUTC = [moment().format('ZZ')];
-var x = 0;
-
-var plus = function(x){
-    x = x + 1;
-    //setTimeout(plus, 1000);
-    console.log(x);
-    return x;
-}
 
 var updateTime = function(globalTimeUTC){
-
     UTC = globalTimeUTC[0];
     // UTC = -4;
 
@@ -24,7 +15,6 @@ var updateTime = function(globalTimeUTC){
     var thisTime = moment().utcOffset(UTC).format('HH:mm:ss');
     var thisDate = moment().utcOffset(UTC).format('ddd, MMM DD, YYYY')
 
-    plus(x);
     // console.log(thisDate);
     // console.log(thisTime);
 
@@ -41,39 +31,36 @@ var loadTime = function(response){
         alert('Please check your input!');
         return;
     };
-
     // Transfer the "Hour String" into "Number".
     // var globalTimeUTC = Number(moment().format('ZZ'));
-    // globalTimeUTC = Number((response.current_observation.local_tz_offset).slice(0, 3).replace(/0/g, ''));
 
     globalTimeUTC.unshift(response.current_observation.local_tz_offset);
     updateTime(globalTimeUTC);
-
 
     // console.log(globalTimeUTC);
 }
 
 var loadWeather = function(response){
     if (response.response.error) {
-
-
         // alert(response.response.error);
         alert('Please check your input!');
         return;
     };
-    // console.log("response=" +JSON.stringify(response));
+    // console.log("response=" +JSON.stringify(response));  // Show JSON.response in Console.
 
     var globalCity = response.current_observation.display_location.city;
     var globalState = response.current_observation.display_location.state;
-    var globalCountry = response.current_observation.display_location.country_iso3166;
+    // var globalCountry = response.current_observation.display_location.country_iso3166;
+    // var globalCountry = response.current_observation.display_location.state_name;
     var globalTemp = response.current_observation.temp_f;
     var globalWeather = response.current_observation.weather;
 
     if (globalState != '') {
-        $('.currentCity').val(globalCity + ', ' + globalState + ', ' + globalCountry);
+        $('.currentCity').val(city + ', ' + country);
+        // $('.currentCity').val(globalCity + ', ' + globalState + ', ' + globalCountry);
     }
     else {
-        $('.currentCity').val(globalCity + ', ' + globalCountry);
+        $('.currentCity').val(city + ', ' + country);
     };
     // $('.temperature').text(globalTemp);
     // $('.weather').text(globalWeather);
@@ -102,7 +89,7 @@ var getPhoto = function(){
     },
 
     function(data) {
-        // alert("data = " + JSON.stringify(data)); // Get data from JSON.
+        // alert("data = " + JSON.stringify(data)); // Show data from JSON.response.
 
         $.each(data.items, function(i, item) {
             var flickrPhoto = item.media.m;
@@ -116,6 +103,8 @@ var getPhoto = function(){
             };
         });
     });
+    console.log(city);
+    console.log(country);
 };
 
 var setLocation = function(){
@@ -124,14 +113,10 @@ var setLocation = function(){
 
     city = locationArray[0];
     country = locationArray[1];
-    // city = $('.currentCity').val();
-    console.log(city);
-    console.log(country);
 
     if(city == null || city == ''){
-        alert('You need to input a city.');
+        alert('Please type in a City, State/Country.');
     };
-    // state = $('.currentState').val();
 
     getWeather();
     getPhoto();
@@ -146,7 +131,13 @@ var init = function(){
 
 var autoFillTags = function(){
     var availableTags = [
-        "Toyko, JP"
+        "Beijing, Beijing",
+        "Frankfurt, Germany",
+        "Hong Kong, Hong Kong",
+        "New York, New York",
+        "Taipei, Taiwan",
+        "Tokyo, Japan",
+        "Paris, France"
     ];
     $( ".currentCity" ).autocomplete({
       source: availableTags
@@ -154,8 +145,7 @@ var autoFillTags = function(){
 };
 
 $(document).ready(function(){
-    init();
     autoFillTags();
+    init();
     setTimeout(updateTime(globalTimeUTC), 1000);
-    setTimeout(plus, 1000);
 });
