@@ -1,6 +1,5 @@
 
 var city = '';
-var state = '';
 var country = '';
 var APIKey = '6f206707a93aceba';
 
@@ -8,35 +7,35 @@ var thisSecond;
 var thisMinute;
 var thisHour = moment().format('HH');
 var thisTime;
-var thisDate = moment().format('ddd, MMM DD, YYYY');
+var thisDate = moment().format('dddd, MMM DD, YYYY');
 
-var wordSetTransfer = function(){
-    var temp = new Array();
-    var before = thisTime;
-    var after = "";
-    for ( var i = 0; i < before.length; i++) {
-        if (before.charCodeAt(i) == 32){
-            temp[i] = 12288;
-        }
-        else if (before.charCodeAt(i) >= 33 && before.charCodeAt(i) <= 126){
-            temp[i] = before.charCodeAt(i) + 65248;
-        }
-        else {
-            temp[i] = before.charCodeAt(i);
-        }
-        after += String.fromCharCode(temp[i]);
-    }
-    thisTime = after;
-}
+// var wordSetTransfer = function(){
+//     var temp = new Array();
+//     var before = thisTime;
+//     var after = "";
+//     for ( var i = 0; i < before.length; i++) {
+//         if (before.charCodeAt(i) == 32){
+//             temp[i] = 12288;
+//         }
+//         else if (before.charCodeAt(i) >= 33 && before.charCodeAt(i) <= 126){
+//             temp[i] = before.charCodeAt(i) + 65248;
+//         }
+//         else {
+//             temp[i] = before.charCodeAt(i);
+//         }
+//         after += String.fromCharCode(temp[i]);
+//     }
+//     thisTime = after;
+// }
 
 var displayDate = function(){
-    // thisDate;
-    // console.log(thisDate);
+    var whiteSpace = " ";
+    thisDate = thisDate;
+    // thisDate = thisDate + " ";
     $('.date').text(thisDate);
 }
 
 var updateTime = function(){
-
     thisSecond = Number(moment().format('ss'));
     thisMinute = Number(moment().format('mm'));
     thisHour = Number(thisHour);
@@ -60,9 +59,9 @@ var updateTime = function(){
         thisHour = "0" + thisHour;
     };
 
-    thisTime = thisHour + ':' + thisMinute + ':' + thisSecond + ' ';
-    wordSetTransfer();
-    // console.log(thisTime);
+    thisTime = thisHour + ':' + thisMinute + ':' + thisSecond;
+    // wordSetTransfer();
+
     $('.time').text(thisTime);
 
     setTimeout(updateTime, 1000);
@@ -75,10 +74,11 @@ var loadTime = function(response){
         return;
     };
 
-    // globalTimeUTC.unshift(response.current_observation.local_tz_offset);
     var globalTimeUTC = response.current_observation.local_tz_offset;
     thisHour = moment().utcOffset(globalTimeUTC).format('HH');
     thisDate = moment().utcOffset(globalTimeUTC).format('ddd, MMM DD, YYYY');
+
+    $('.currentCity').val(city + ', ' + country);
 
     updateTime();
     displayDate();
@@ -92,25 +92,33 @@ var loadWeather = function(response){
     };
     // console.log("response=" +JSON.stringify(response));  // Show JSON.response in Console.
 
-    var globalCity = response.current_observation.display_location.city;
-    var globalState = response.current_observation.display_location.state;
-    // var globalCountry = response.current_observation.display_location.country_iso3166;
-    // var globalCountry = response.current_observation.display_location.state_name;
-    var globalTemp = response.current_observation.temp_f;
-    var globalWeather = response.current_observation.weather;
 
-    if (globalState != '') {
-        $('.currentCity').val(city + ', ' + country);
-    }
-    else {
-        $('.currentCity').val(city + ', ' + country);
+    for (var i = 1; i <= 5; i++) {
+        var iconURL = "http://icons.wxug.com/i/c/j/";
+
+        var forecastDate = response['forecast']['simpleforecast']['forecastday'][i]['date']['weekday'];
+
+        var fahrenheitHigh = response.forecast.simpleforecast.forecastday[i]['high']['fahrenheit'];
+        var fahrenheitLow = response.forecast.simpleforecast.forecastday[i]['low']['fahrenheit'];
+        var fahrenheit = fahrenheitLow + ' - ' + fahrenheitHigh;
+
+        var celciusHigh = response.forecast.simpleforecast.forecastday[i]['high']['celsius'];
+        var celciusLow = response.forecast.simpleforecast.forecastday[i]['low']['celsius'];
+        var celsius = celciusLow + ' - ' + celciusHigh;
+
+        var forecastIcon = response.forecast.simpleforecast.forecastday[i]['icon'];
+        iconURL = iconURL + forecastIcon + '.gif'
+
+        console.log(fahrenheit, celsius, forecastDate);
+        console.log(iconURL);
     };
+
     // $('.temperature').text(globalTemp);
     // $('.weather').text(globalWeather);
 };
 
 var getWeather = function(){
-    var weatherAPI = 'http://api.wunderground.com/api/'+ APIKey + '/conditions/q/' + country + '/' + city + '.json';
+    var weatherAPI = 'http://api.wunderground.com/api/'+ APIKey + '/conditions/forecast10day/q/' + country + '/' + city + '.json';
 
     $.ajax({
         url : weatherAPI,
@@ -146,8 +154,6 @@ var getPhoto = function(){
             };
         });
     });
-    console.log(city);
-    console.log(country);
 };
 
 var setLocation = function(){
