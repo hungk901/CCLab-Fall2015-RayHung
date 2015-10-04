@@ -3,26 +3,69 @@ var city = '';
 var state = '';
 var country = '';
 var APIKey = '6f206707a93aceba';
-var UTC;
-var globalTimeUTC = [moment().format('ZZ')];
 
-var updateTime = function(globalTimeUTC){
-    UTC = globalTimeUTC[0];
-    // UTC = -4;
+var thisSecond;
+var thisMinute;
+var thisHour = moment().format('HH');
+var thisTime;
+var thisDate = moment().format('ddd, MMM DD, YYYY');
 
-    // console.log(globalTimeUTC);
+var wordSetTransfer = function(){
+    var temp = new Array();
+    var before = thisTime;
+    var after = "";
+    for ( var i = 0; i < before.length; i++) {
+        if (before.charCodeAt(i) == 32){
+            temp[i] = 12288;
+        }
+        else if (before.charCodeAt(i) >= 33 && before.charCodeAt(i) <= 126){
+            temp[i] = before.charCodeAt(i) + 65248;
+        }
+        else {
+            temp[i] = before.charCodeAt(i);
+        }
+        after += String.fromCharCode(temp[i]);
+    }
+    thisTime = after;
+}
 
-    var thisTime = moment().utcOffset(UTC).format('HH:mm:ss');
-    var thisDate = moment().utcOffset(UTC).format('ddd, MMM DD, YYYY')
-
+var displayDate = function(){
+    // thisDate;
     // console.log(thisDate);
-    // console.log(thisTime);
-
-    $('.time').text(thisTime);
     $('.date').text(thisDate);
+}
 
-    // setTimeout(updateTime, 1000);
-    // setTimeout(plus, 1000);
+var updateTime = function(){
+
+    thisSecond = Number(moment().format('ss'));
+    thisMinute = Number(moment().format('mm'));
+    thisHour = Number(thisHour);
+
+    if (thisSecond == 60) {
+        thisSecond = 0;
+        thisMinute = thisMinute + 1;
+    };
+    if (thisMinute == 60) {
+        thisMinute = 0;
+        thisHour = thisHour + 1;
+    };
+
+    if (thisSecond < 10) {
+        thisSecond = "0" + thisSecond;
+    };
+    if (thisMinute < 10) {
+        thisMinute = "0" + thisMinute;
+    };
+    if (thisHour < 10) {
+        thisHour = "0" + thisHour;
+    };
+
+    thisTime = thisHour + ':' + thisMinute + ':' + thisSecond + ' ';
+    wordSetTransfer();
+    // console.log(thisTime);
+    $('.time').text(thisTime);
+
+    setTimeout(updateTime, 1000);
 }
 
 var loadTime = function(response){
@@ -31,13 +74,14 @@ var loadTime = function(response){
         alert('Please check your input!');
         return;
     };
-    // Transfer the "Hour String" into "Number".
-    // var globalTimeUTC = Number(moment().format('ZZ'));
 
-    globalTimeUTC.unshift(response.current_observation.local_tz_offset);
-    updateTime(globalTimeUTC);
+    // globalTimeUTC.unshift(response.current_observation.local_tz_offset);
+    var globalTimeUTC = response.current_observation.local_tz_offset;
+    thisHour = moment().utcOffset(globalTimeUTC).format('HH');
+    thisDate = moment().utcOffset(globalTimeUTC).format('ddd, MMM DD, YYYY');
 
-    // console.log(globalTimeUTC);
+    updateTime();
+    displayDate();
 }
 
 var loadWeather = function(response){
@@ -57,7 +101,6 @@ var loadWeather = function(response){
 
     if (globalState != '') {
         $('.currentCity').val(city + ', ' + country);
-        // $('.currentCity').val(globalCity + ', ' + globalState + ', ' + globalCountry);
     }
     else {
         $('.currentCity').val(city + ', ' + country);
@@ -96,7 +139,7 @@ var getPhoto = function(){
             flickrPhoto = flickrPhoto.split("_m.jpg", 1) + "_b.jpg";    // Restructuring the URL to get HQ photo.
 
             var imageURL = ' url("' + flickrPhoto + '") ';
-            $('.images').css("background-image", imageURL);
+            $('body').css("background-image", imageURL);
 
             if (i === 0) {
                 return false;
@@ -124,14 +167,16 @@ var setLocation = function(){
 
 var init = function(){
     $('#submit').click(function(e){
-        e.preventDefault();
+        e.preventDefault(e);
         setLocation();
+        $('.currentCity').attr('onfocus', '');
     });
 };
 
 var autoFillTags = function(){
     var availableTags = [
         "Beijing, Beijing",
+        "Brisbane, Australia",
         "Frankfurt, Germany",
         "Hong Kong, Hong Kong",
         "New York, New York",
@@ -147,5 +192,6 @@ var autoFillTags = function(){
 $(document).ready(function(){
     autoFillTags();
     init();
-    setTimeout(updateTime(globalTimeUTC), 1000);
+    updateTime();
+    displayDate();
 });

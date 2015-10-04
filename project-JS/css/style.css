@@ -1,84 +1,328 @@
-body{
-   background-color: #000000;
-   margin: 0px;
-   font-family: 'Cabin', sans-serif;
+/*-----------------------------------------------------------*/
+/*          Screen Setting For normal PC and Laptop          */
+/*-----------------------------------------------------------*/
+@media screen and (min-width: 1200px) {
+   body{
+      z-index: -1;
+      margin: 0px;
+      background: #000000 center center fixed no-repeat;
+      background-size: cover;
+      font-family: 'Cabin', sans-serif;
+   }
+
+   .timeText{
+      z-index: 1;
+      margin:0 auto;
+      text-align: center;
+      text-shadow: 1.5px 1.5px 5px rgba(0, 0, 0, 0.5);
+      color: white;
+   }
+   .time{
+      position: relative;
+      /*letter-spacing: 15px;*/
+      letter-spacing: -45px;
+      top: 25vh;
+      font-size: 120px;
+   }
+   .date{
+      position: relative;
+      letter-spacing: 5px;
+      top: 25vh;
+      font-size: 48px;
+   }
+
+   .weatherWidget{
+      color: white;
+   }
+
+   .currentLocation{
+      z-index: 2;
+      position: absolute;
+      top: 80vh;
+      right: 5vw;
+   }
+
+   .currentCity{
+      background-color: rgba(255, 255, 255, 0.75);
+      border: solid 5px rgba(250, 250, 250, 0.5);
+      color: rgba(100, 100, 100, 0.8);
+      margin: 5px;
+      padding: 5px;
+      height: 50px;
+      font-size: 36px;
+      text-shadow: 0.5px 0.5px 0.25px rgba(0, 0, 0, 0.5);
+      transition: border 0.3s;
+   }
+   .currentCity:focus,
+   .currentCity.focus{
+      background-color: rgba(250, 250, 250, 0.85);
+      border: solid 5px rgba(150, 150, 150, 1);
+      color: rgba(50, 50, 50, 1);
+   }
+
+   #submit{
+      background-color: rgba(255, 255, 255, 0.75);
+      border: solid 5px rgba(250, 250, 250, 0.5);
+      color: rgba(75, 75, 75, 1);
+      margin: 5px;
+      padding: 5px;
+      height: 70px;
+      width: 100px;
+      font-size: 36px;
+      text-shadow: 0.5px 0.5px 0.25px rgba(0, 0, 0, 0.5);
+      transition: border 0.2s;
+   }
+   #submit:hover{
+      background-color: rgba(250, 250, 250, 0.85);
+      border: solid 5px rgba(150, 150, 150, 1);
+      color: rgba(50, 50, 50, 1);
+   }
 }
 
-.images{
-   position: absolute;
-   top: 0px;
-   left: 0px;
-   z-index: -1;
-   height: 100vh;
-   width: 100vw;
-   background-repeat:no-repeat;
-   background-size:cover;
+/*------------------------------------------------------------*/
+/*          Screen Setting For smaller PC and Laptop          */
+/*------------------------------------------------------------*/
+@media screen and (min-width: 769px) and (max-width: 1200px) {
+   body{
+      z-index: -1;
+      margin: 0px;
+      background: #000000 center center fixed no-repeat;
+      background-size: cover;
+      font-family: 'Cabin', sans-serif;
+   }
+
+   .timeText{
+      z-index: 1;
+      margin:0 auto;
+      text-align: center;
+      text-shadow: 1.5px 1.5px 5px rgba(0, 0, 0, 0.5);
+      color: white;
+   }
+   .time{
+      position: relative;
+      letter-spacing: -45px;
+      top: 25vh;
+      font-size: 120px;
+   }
+   .date{
+      position: relative;
+      letter-spacing: 5px;
+      top: 25vh;
+      font-size: 48px;
+   }
+
+   .weatherWidget{
+      color: white;
+   }
+
+   .currentLocation{
+      z-index: 2;
+      position: absolute;
+      top: 80vh;
+      right: 5vw;
+   }
+
+   .currentCity{
+      background-color: rgba(255, 255, 255, 0.75);
+      border: solid 5px rgba(250, 250, 250, 0.5);
+      color: rgba(100, 100, 100, 0.8);
+      margin: 5px;
+      padding: 5px;
+      height: 50px;
+      font-size: 36px;
+      text-shadow: 0.5px 0.5px 0.25px rgba(0, 0, 0, 0.5);
+      transition: border 0.3s;
+   }
+   .currentCity:focus,
+   .currentCity.focus{
+      background-color: rgba(250, 250, 250, 0.85);
+      border: solid 5px rgba(150, 150, 150, 1);
+      color: rgba(50, 50, 50, 1);
+   }
+
+   #submit{
+      background-color: rgba(255, 255, 255, 0.75);
+      border: solid 5px rgba(250, 250, 250, 0.5);
+      color: rgba(75, 75, 75, 1);
+      margin: 5px;
+      padding: 5px;
+      height: 70px;
+      width: 100px;
+      font-size: 36px;
+      text-shadow: 0.5px 0.5px 0.25px rgba(0, 0, 0, 0.5);
+      transition: border 0.2s;
+   }
+   #submit:hover{
+      background-color: rgba(250, 250, 250, 0.85);
+      border: solid 5px rgba(150, 150, 150, 1);
+      color: rgba(50, 50, 50, 1);
+   }
 }
 
-.timeText{
-   z-index: 1;
-   margin:0 auto;
-   text-align: center;
-   text-shadow: 1.5px 1.5px 5px rgba(0, 0, 0, 0.5);
-   color: white;
-}
-.time{
-   position: relative;
-   letter-spacing: 15px;
-   top: 25vh;
-   font-size: 120px;
-}
-.date{
-   position: relative;
-   letter-spacing: 5px;
-   top: 25vh;
-   font-size: 48px;
+/*---------------------------------------------*/
+/*          Screen Setting For Tablet          */
+/*---------------------------------------------*/
+@media screen and (min-width: 481px) and (max-width: 768px) {
+   body{
+      z-index: -1;
+      margin: 0px;
+      background: #000000 center center fixed no-repeat;
+      background-size: cover;
+      font-family: 'Cabin', sans-serif;
+   }
+
+   .timeText{
+      z-index: 1;
+      margin:0 auto;
+      text-align: center;
+      text-shadow: 1.5px 1.5px 5px rgba(0, 0, 0, 0.5);
+      color: white;
+   }
+   .time{
+      position: relative;
+      letter-spacing: -25px;
+      top: 25vh;
+      font-size: 75px;
+   }
+   .date{
+      position: relative;
+      letter-spacing: 5px;
+      top: 25vh;
+      font-size: 36px;
+   }
+
+   .weatherWidget{
+      color: white;
+   }
+
+   .currentLocation{
+      z-index: 2;
+      margin: 0 auto;
+      text-align: center;
+   }
+
+   .currentCity{
+      position: relative;
+      top: 40vh;
+      background-color: rgba(255, 255, 255, 0.75);
+      border: solid 5px rgba(250, 250, 250, 0.5);
+      color: rgba(100, 100, 100, 0.8);
+      margin: 5px;
+      padding: 5px;
+      height: 75px;
+      width: 360px;
+      font-size: 32px;
+      text-shadow: 0.5px 0.5px 0.25px rgba(0, 0, 0, 0.5);
+      transition: border 0.3s;
+   }
+   .currentCity:focus,
+   .currentCity.focus{
+      background-color: rgba(250, 250, 250, 0.85);
+      border: solid 5px rgba(150, 150, 150, 1);
+      color: rgba(50, 50, 50, 1);
+   }
+
+   #submit{
+      position: relative;
+      top: 40vh;
+      background-color: rgba(255, 255, 255, 0.75);
+      border: solid 5px rgba(250, 250, 250, 0.5);
+      color: rgba(75, 75, 75, 1);
+      margin: 5px;
+      padding: 5px;
+      height: 70px;
+      width: 380px;
+      font-size: 32px;
+      text-shadow: 0.5px 0.5px 0.25px rgba(0, 0, 0, 0.5);
+      transition: border 0.2s;
+   }
+   #submit:hover{
+      background-color: rgba(250, 250, 250, 0.85);
+      border: solid 5px rgba(150, 150, 150, 1);
+      color: rgba(50, 50, 50, 1);
+   }
 }
 
-.weatherWidget{
-   color: white;
-}
+/*----------------------------------------------------*/
+/*          Screen Setting For Mobile Device          */
+/*----------------------------------------------------*/
+@media screen and (max-width: 480px) {
+   body{
+      z-index: -1;
+      margin: 0px;
+      background: #000000 center center fixed no-repeat;
+      background-size: cover;
+      font-family: 'Cabin', sans-serif;
+   }
 
-.currentLocation{
-   z-index: 2;
-   position: absolute;
-   top: 80vh;
-   right: 5vw;
-}
+   .timeText{
+      z-index: 1;
+      margin:0 auto;
+      text-align: center;
+      text-shadow: 1.5px 1.5px 5px rgba(0, 0, 0, 0.5);
+      color: white;
+   }
+   .time{
+      position: relative;
+      letter-spacing: -25px;
+      top: 25vh;
+      font-size: 65px;
+   }
+   .date{
+      position: relative;
+      letter-spacing: 5px;
+      top: 25vh;
+      font-size: 30px;
+   }
 
-.currentCity{
-   background-color: rgba(255, 255, 255, 0.75);
-   border: solid 5px rgba(250, 250, 250, 0.5);
-   color: rgba(100, 100, 100, 0.8);
-   margin: 5px;
-   padding: 5px;
-   height: 50px;
-   font-size: 36px;
-   text-shadow: 0.5px 0.5px 0.25px rgba(0, 0, 0, 0.5);
-   transition: border 0.3s;
-}
-.currentCity:focus,
-.currentCity.focus{
-   background-color: rgba(250, 250, 250, 0.85);
-   border: solid 5px rgba(150, 150, 150, 1);
-   color: rgba(50, 50, 50, 1);
-}
+   .weatherWidget{
+      color: white;
+   }
 
-#submit{
-   background-color: rgba(255, 255, 255, 0.75);
-   border: solid 5px rgba(250, 250, 250, 0.5);
-   color: rgba(75, 75, 75, 1);
-   margin: 5px;
-   padding: 5px;
-   height: 70px;
-   width: 100px;
-   font-size: 36px;
-   text-shadow: 0.5px 0.5px 0.25px rgba(0, 0, 0, 0.5);
-   transition: border 0.2s;
-}
-#submit:hover{
-   background-color: rgba(250, 250, 250, 0.85);
-   border: solid 5px rgba(150, 150, 150, 1);
-   color: rgba(50, 50, 50, 1);
-}
+   .currentLocation{
+      z-index: 2;
+      margin: 0 auto;
+      text-align: center;
+   }
 
+   .currentCity{
+      position: relative;
+      top: 40vh;
+      background-color: rgba(255, 255, 255, 0.75);
+      border: solid 5px rgba(250, 250, 250, 0.5);
+      color: rgba(100, 100, 100, 0.8);
+      margin: 5px;
+      padding: 5px;
+      height: 50px;
+      width: 300px;
+      font-size: 24px;
+      text-shadow: 0.5px 0.5px 0.25px rgba(0, 0, 0, 0.5);
+      transition: border 0.3s;
+   }
+   .currentCity:focus,
+   .currentCity.focus{
+      background-color: rgba(250, 250, 250, 0.85);
+      border: solid 5px rgba(150, 150, 150, 1);
+      color: rgba(50, 50, 50, 1);
+   }
+
+   #submit{
+      position: relative;
+      top: 40vh;
+      background-color: rgba(255, 255, 255, 0.75);
+      border: solid 5px rgba(250, 250, 250, 0.5);
+      color: rgba(75, 75, 75, 1);
+      margin: 5px;
+      padding: 5px;
+      height: 50px;
+      width: 320px;
+      font-size: 24px;
+      text-shadow: 0.5px 0.5px 0.25px rgba(0, 0, 0, 0.5);
+      transition: border 0.2s;
+   }
+   #submit:hover{
+      background-color: rgba(250, 250, 250, 0.85);
+      border: solid 5px rgba(150, 150, 150, 1);
+      color: rgba(50, 50, 50, 1);
+   }
+}
