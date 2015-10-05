@@ -5,40 +5,55 @@
    body{
       z-index: -1;
       margin: 0px;
-      background: #000000 center center fixed no-repeat;
+      background: #333333 center center fixed no-repeat;
       background-size: cover;
       font-family: 'Roboto Mono', ;
    }
 
    .weatherWidget{
-      color: white;
+      color: rgba(250, 250, 250, 1);
    }
    .timeText{
       z-index: 1;
       margin:0 auto;
       text-align: center;
       text-shadow: 1.5px 1.5px 5px rgba(0, 0, 0, 0.5);
-      color: white;
+      clear: both;
    }
    .time{
       position: relative;
       letter-spacing: 10px;
-      top: 25vh;
+      top: 10vh;
       font-size: 150px;
       font-weight: 700;
    }
    .date{
       position: relative;
-      top: 25vh;
+      top: 10vh;
       font-size: 72px;
       font-weight: 400;
    }
 
-   .currentLocation{
+   .forecastBox{
       z-index: 2;
+      position: relative;
+      margin: 0 auto;
+      top: 12.5vh;
+      text-align: center;
+      text-shadow: 2.5px 2.5px 5px rgba(0, 0, 0, 0.5);
+   }
+   .forecast_1, .forecast_2, .forecast_3, .forecast_4, .forecast_5{
+      display: inline-block;
+      margin: 0 2vw;
+      font-size: 20px
+   }
+
+   .currentLocation{
+      z-index: 3;
       position: absolute;
       top: 80vh;
-      right: 5vw;
+      right: 10vw;
+      clear: both;
    }
    .currentCity{
       background-color: rgba(255, 255, 255, 0.75);
@@ -47,7 +62,7 @@
       margin: 5px;
       padding: 5px;
       height: 50px;
-      width: 450px;
+      width: 425px;
       font-size: 30px;
       text-shadow: 0.5px 0.5px 0.25px rgba(0, 0, 0, 0.5);
       transition: border 0.3s;
@@ -75,6 +90,15 @@
       border: solid 5px rgba(150, 150, 150, 1);
       color: rgba(50, 50, 50, 1);
    }
+
+   .backWhite{
+      z-index: 0;
+      position: absolute;
+      background-color: rgba(255, 255, 255, 0.2);
+      top: 12.5vh;
+      height: 65vh;
+      width: 100vw;
+   }
 }
 
 /*================================================================================*/
@@ -82,42 +106,54 @@
 /*================================================================================*/
 @media screen and (min-width: 769px) and (max-width: 1200px) {
    body{
-      z-index: -1;
       margin: 0px;
-      background: #000000 center center fixed no-repeat;
+      background: #333333 center center fixed no-repeat;
       background-size: cover;
       font-family: 'Roboto Mono', ;
    }
 
    .weatherWidget{
-      color: white;
+      color: rgba(250, 250, 250, 1);
    }
    .timeText{
       z-index: 1;
+      position: relative;
+      top: 15vh;
       margin:0 auto;
       text-align: center;
       text-shadow: 1.5px 1.5px 5px rgba(0, 0, 0, 0.5);
-      color: white;
+      clear: both;
    }
    .time{
-      position: relative;
       letter-spacing: 5px;
-      top: 25vh;
       font-size: 125px;
       font-weight: 700;
    }
    .date{
-      position: relative;
-      top: 25vh;
       font-size: 60px;
       font-weight: 400;
    }
 
-   .currentLocation{
+   .forecastBox{
       z-index: 2;
+      position: relative;
+      margin: 0 auto;
+      top: 17.5vh;
+      text-align: center;
+      text-shadow: 2.5px 2.5px 5px rgba(0, 0, 0, 0.5);
+   }
+   .forecast_1, .forecast_2, .forecast_3, .forecast_4, .forecast_5{
+      display: inline-block;
+      margin: 0 2vw;
+      font-size: 18px
+   }
+
+   .currentLocation{
+      z-index: 3;
       position: absolute;
       top: 80vh;
       right: 5vw;
+      clear: both;
    }
    .currentCity{
       background-color: rgba(255, 255, 255, 0.75);
@@ -154,6 +190,15 @@
       border: solid 5px rgba(150, 150, 150, 1);
       color: rgba(50, 50, 50, 1);
    }
+
+   .backWhite{
+      z-index: 0;
+      position: absolute;
+      background-color: rgba(255, 255, 255, 0.3);
+      top: 15vh;
+      height: 60vh;
+      width: 100vw;
+   }
 }
 
 /*================================================================================*/
@@ -163,44 +208,56 @@
    body{
       z-index: -1;
       margin: 0px;
-      background: #000000 center center fixed no-repeat;
+      background: #333333 center center fixed no-repeat;
       background-size: cover;
       font-family: 'Roboto Mono', ;
    }
 
    .weatherWidget{
-      color: white;
+      color: rgba(250, 250, 250, 1);
    }
    .timeText{
       z-index: 1;
+      position: relative;
+      top: 10vh;
       margin:0 auto;
       text-align: center;
       text-shadow: 1.5px 1.5px 5px rgba(0, 0, 0, 0.5);
-      color: white;
+      clear: both;
    }
    .time{
-      position: relative;
       letter-spacing: 5px;
-      top: 25vh;
       font-size: 75px;
       font-weight: 500;
    }
    .date{
-      position: relative;
       letter-spacing: auto;
-      top: 25vh;
       font-size: 36px;
       font-weight: 400;
    }
 
-   .currentLocation{
+   .forecastBox{
       z-index: 2;
+      position: relative;
       margin: 0 auto;
+      top: 15vh;
       text-align: center;
    }
+   .forecast_1, .forecast_2, .forecast_3, .forecast_4, .forecast_5{
+      display: inline-block;
+      margin: 0 0.5vw;
+      font-size: 15px
+   }
+
+   .currentLocation{
+      z-index: 3;
+      position: absolute;
+      top: 60vh;
+      margin: 0 auto;
+      text-align: center;
+      clear: both;
+   }
    .currentCity{
-      position: relative;
-      top: 40vh;
       background-color: rgba(255, 255, 255, 0.75);
       border: solid 5px rgba(250, 250, 250, 0.5);
       color: rgba(100, 100, 100, 0.8);
@@ -219,8 +276,6 @@
       color: rgba(50, 50, 50, 1);
    }
    #submit{
-      position: relative;
-      top: 40vh;
       background-color: rgba(255, 255, 255, 0.75);
       border: solid 5px rgba(250, 250, 250, 0.5);
       color: rgba(75, 75, 75, 1);
@@ -237,6 +292,15 @@
       border: solid 5px rgba(150, 150, 150, 1);
       color: rgba(50, 50, 50, 1);
    }
+
+   .backWhite{
+      z-index: 0;
+      position: absolute;
+      background-color: rgba(255, 255, 255, 0.3);
+      top: 10vh;
+      height: 45vh;
+      width: 100vw;
+   }
 }
 
 /*================================================================================*/
@@ -246,44 +310,56 @@
    body{
       z-index: -1;
       margin: 0px;
-      background: #000000 center center fixed no-repeat;
+      background: #333333 center center fixed no-repeat;
       background-size: cover;
       font-family: 'Roboto Mono', ;
    }
 
    .weatherWidget{
-      color: white;
+      color: rgba(250, 250, 250, 1);
    }
    .timeText{
       z-index: 1;
+      position: relative;
       margin:0 auto;
+      top: 15vh;
       text-align: center;
       text-shadow: 1.5px 1.5px 5px rgba(0, 0, 0, 0.5);
-      color: white;
+      clear: both;
    }
    .time{
-      position: relative;
       letter-spacing: 5px;
-      top: 25vh;
       font-size: 65px;
       font-weight: 500;
    }
    .date{
-      position: relative;
       letter-spacing: -1px;
-      top: 25vh;
       font-size: 30px;
       font-weight: 400;
    }
 
-   .currentLocation{
+   .forecastBox{
       z-index: 2;
+      position: relative;
       margin: 0 auto;
+      top: 20vh;
       text-align: center;
    }
+   .forecast_1, .forecast_2, .forecast_3, .forecast_4, .forecast_5{
+      display: inline-block;
+      margin: .25vw;
+      font-size: 12px
+   }
+
+   .currentLocation{
+      z-index: 3;
+      position: absolute;
+      margin: 0 auto;
+      top: 60vh;
+      text-align: center;
+      clear: both;
+   }
    .currentCity{
-      position: relative;
-      top: 40vh;
       background-color: rgba(255, 255, 255, 0.75);
       border: solid 5px rgba(250, 250, 250, 0.5);
       color: rgba(100, 100, 100, 0.8);
@@ -302,8 +378,6 @@
       color: rgba(50, 50, 50, 1);
    }
    #submit{
-      position: relative;
-      top: 40vh;
       background-color: rgba(255, 255, 255, 0.75);
       border: solid 5px rgba(250, 250, 250, 0.5);
       color: rgba(75, 75, 75, 1);
@@ -319,5 +393,14 @@
       background-color: rgba(250, 250, 250, 0.85);
       border: solid 5px rgba(150, 150, 150, 1);
       color: rgba(50, 50, 50, 1);
+   }
+
+   .backWhite{
+      z-index: 0;
+      position: absolute;
+      background-color: rgba(255, 255, 255, 0.3);
+      top: 15vh;
+      height: 40vh;
+      width: 100vw;
    }
 }

@@ -1,13 +1,13 @@
 
-var city = '';
-var country = '';
+var city = 'New York';
+var country = 'New York';
 var APIKey = '6f206707a93aceba';
 
 var thisSecond;
 var thisMinute;
 var thisHour = moment().format('HH');
 var thisTime;
-var thisDate = moment().format('dddd, MMM DD, YYYY');
+var thisDate = moment().format('ddd, MMM DD, YYYY');
 
 // var wordSetTransfer = function(){
 //     var temp = new Array();
@@ -78,8 +78,6 @@ var loadTime = function(response){
     thisHour = moment().utcOffset(globalTimeUTC).format('HH');
     thisDate = moment().utcOffset(globalTimeUTC).format('ddd, MMM DD, YYYY');
 
-    $('.currentCity').val(city + ', ' + country);
-
     updateTime();
     displayDate();
 }
@@ -94,27 +92,28 @@ var loadWeather = function(response){
 
 
     for (var i = 1; i <= 5; i++) {
-        var iconURL = "http://icons.wxug.com/i/c/j/";
+        var forecastClass = '.forecast_' + i;
+        $(forecastClass).empty();
 
-        var forecastDate = response['forecast']['simpleforecast']['forecastday'][i]['date']['weekday'];
+        var forecastDate = response.forecast.simpleforecast.forecastday[i]['date']['weekday'];
 
         var fahrenheitHigh = response.forecast.simpleforecast.forecastday[i]['high']['fahrenheit'];
         var fahrenheitLow = response.forecast.simpleforecast.forecastday[i]['low']['fahrenheit'];
-        var fahrenheit = fahrenheitLow + ' - ' + fahrenheitHigh;
+        var fahrenheit = fahrenheitLow + '&deg;F' + '-' + fahrenheitHigh + '&deg;F';
+        var fahrenheitDate = "<br/>" + fahrenheit + "<br/>" + forecastDate;
 
-        var celciusHigh = response.forecast.simpleforecast.forecastday[i]['high']['celsius'];
-        var celciusLow = response.forecast.simpleforecast.forecastday[i]['low']['celsius'];
-        var celsius = celciusLow + ' - ' + celciusHigh;
+        // var celciusHigh = response.forecast.simpleforecast.forecastday[i]['high']['celsius'];
+        // var celciusLow = response.forecast.simpleforecast.forecastday[i]['low']['celsius'];
+        // var celsius = celciusLow + '&deg;C' +'-' + celciusHigh + '&deg;C';
+        // var celsiusDate = "<br/>" + celsius + "<br/>" + forecastDate;
 
+        var iconURL = "http://icons.wxug.com/i/c/i/";
         var forecastIcon = response.forecast.simpleforecast.forecastday[i]['icon'];
-        iconURL = iconURL + forecastIcon + '.gif'
+        iconURL = iconURL + forecastIcon + '.gif';
 
-        console.log(fahrenheit, celsius, forecastDate);
-        console.log(iconURL);
+        $('<img src="' + iconURL + '" />').appendTo(forecastClass);
+        $(forecastClass).append(fahrenheitDate);
     };
-
-    // $('.temperature').text(globalTemp);
-    // $('.weather').text(globalWeather);
 };
 
 var getWeather = function(){
@@ -134,8 +133,8 @@ var getPhoto = function(){
     var flickrAPI = "http://api.flickr.com/services/feeds/photos_public.gne?jsoncallback=?";
 
     $.getJSON(flickrAPI, {
-        tags: city + ', ' + country + ', sky',
-        tagmode: "all",
+        tags: '"' + city + ',' + country  + ',' + 'sky' + '"',
+        tagmode: "ALL",
         format: "json"
     },
 
@@ -167,6 +166,8 @@ var setLocation = function(){
         alert('Please type in a City, State/Country.');
     };
 
+    $('.currentCity').val(city + ', ' + country);
+
     getWeather();
     getPhoto();
 };
@@ -175,29 +176,51 @@ var init = function(){
     $('#submit').click(function(e){
         e.preventDefault(e);
         setLocation();
-        $('.currentCity').attr('onfocus', '');
     });
+
+    if ($('.currentCity') == "City, State/Country") {
+        $('.currentCity').attr('onfocus', '');
+    };
 };
 
 var autoFillTags = function(){
     var availableTags = [
+        "Amsterdam, Netherlands",
+        "Bangkok, Thailand",
+        "Barcelona, Spain",
         "Beijing, Beijing",
         "Brisbane, Australia",
+        "Cairo, Egypt",
+        "Dubai, United Arab Emirates",
+        "Dublin, Ireland",
         "Frankfurt, Germany",
         "Hong Kong, Hong Kong",
+        "Istanbul, Turkey",
+        "KualaLumpur, Malaysia",
+        "Las Vegas, Nevada",
+        "Miami, Florida",
+        "Moscow, Russia",
         "New York, New York",
+        "Prague, Czech Republic",
+        "Rome, Italy",
+        "Singapore, Singapore",
         "Taipei, Taiwan",
         "Tokyo, Japan",
-        "Paris, France"
+        "Toronto, Canada",
+        "Paris, France",
+        "Vienna, Austria"
     ];
     $( ".currentCity" ).autocomplete({
-      source: availableTags
+        source: availableTags,
+        position: { my: "left bottom", at: "left top", collision: "flip" }
     });
 };
 
 $(document).ready(function(){
     autoFillTags();
-    init();
     updateTime();
     displayDate();
+    getWeather();
+    getPhoto();
+    init();
 });
