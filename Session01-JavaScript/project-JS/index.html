@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+   <title>Worldwide Weather Widget</title>
+   <link rel="stylesheet" href="css/jquery-ui.min.css">
+   <link rel="stylesheet" href="css/style.css">
+   <link href='https://fonts.googleapis.com/css?family=Roboto+Mono:400,500,700' rel='stylesheet' type='text/css'>
+</head>
+
+<body>
+
+   <div class="weatherWidget">
+      <div class="timeText">
+         <div class="time"></div>
+         <div class="date"></div>
+      </div>
+
+      <div class="forecastBox">
+         <div class="forecast_1"></div>
+         <div class="forecast_2"></div>
+         <div class="forecast_3"></div>
+         <div class="forecast_4"></div>
+         <div class="forecast_5"></div>
+      </div>
+
+      <form class="currentLocation">
+         <input type="text" class="currentCity" value="City, State/Country"  onfocus="this.value=''">
+         <input type="submit" id="submit" value="Go">
+      </form>
+   </div>
+
+   <div class="backWhite"></div>
+
+   <div style="display:none">
+      <script src="js/jquery-2.1.4.min.js"></script>
+      <script src="js/jquery-ui.js"></script>
+      <script src="js/moment.min.js"></script>
+      <script src="js/moment-timezone-with-data.min.js"></script>
+      <script src="js/main.js"></script>
+   </div>
+
+</body>
+</html>
