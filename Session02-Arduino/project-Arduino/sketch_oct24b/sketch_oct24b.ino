@@ -56,6 +56,7 @@ void loop(){
     for(int i = 0; i <= numLED; i++){
       if(i < dbAverage){
         digitalWrite(2+i, HIGH);
+        digitalWrite(3+i, HIGH);
       }
     }
 
