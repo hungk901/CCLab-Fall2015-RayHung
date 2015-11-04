@@ -6,10 +6,12 @@
 * ####Session 01 - JavaScript
 	* Week02
 	* Week03
-	* JavaScript Project
+	* Week05~Week06 - JavaScript Project
 
 * ####Session 02 - Arduino
 	* Week07	 
+	* Week08
+	* Week09~Week10 - Arduino Project
 
 * ####Session 03 - openFramework
  
