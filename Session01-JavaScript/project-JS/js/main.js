@@ -169,7 +169,7 @@ var setLocation = function(){
     $('.currentCity').val(city + ', ' + country);
 
     getWeather();
-    getPhoto();
+    //getPhoto();
 };
 
 var init = function(){
@@ -248,6 +248,6 @@ $(document).ready(function(){
     updateTime();
     displayDate();
     getWeather();
-    getPhoto();
+    //getPhoto();
     init();
 });
